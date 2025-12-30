@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:20:14 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 16:28:27 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/12/30 19:21:23 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static bool	parse_camera_args(char **tokens, t_scene *scene)
 		return (false);
 	if (!parse_vec3(tokens[2], &scene->camera->direction))
 		return (false);
-	if (!check_ranged(scene->camera->direction.x, -1.0, 1.0)
-		|| !check_ranged(scene->camera->direction.y, -1.0, 1.0)
-		|| !check_ranged(scene->camera->direction.z, -1.0, 1.0))
+	if (!check_range_vec3(scene->camera->direction, -1.0, 1.0))
 		return (put_error("Camera dir vector must be in range [-1,1]\n"));
 	if (!check_integer(tokens[3]))
 		return (put_error("Invalid FOV\n"));
@@ -29,6 +27,7 @@ static bool	parse_camera_args(char **tokens, t_scene *scene)
 		return (put_error("Camera FOV must be in range [0, 180]\n"));
 	return (true);
 }
+
 bool	parse_camera(char **tokens, t_scene *scene)
 {
 	if (scene->camera)

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:43:08 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 16:02:55 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/12/30 19:17:03 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ bool	check_rgb_values(int r, int g, int b)
 bool	check_ranged(double value, double min, double max)
 {
 	if (value < min || value > max)
+		return (false);
+	return (true);
+}
+
+bool	check_range_vec3(t_vec3 vec, double min, double max)
+{
+	if (!check_ranged(vec.x, min, max))
+		return (false);
+	if (!check_ranged(vec.y, min, max))
+		return (false);
+	if (!check_ranged(vec.z, min, max))
 		return (false);
 	return (true);
 }

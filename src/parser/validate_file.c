@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:44:02 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 16:02:55 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/12/30 19:16:08 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	check_integer(const char *str)
 
 bool	check_split_length(char **tokens, int expected_length)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (!tokens)

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:14:30 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 16:39:07 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/12/30 19:16:54 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	parse_rgb(char *str, t_rgb *color)
 
 bool	parse_vec3(char *str, t_vec3 *vec)
 {
-	char **components;
+	char	**components;
 
 	components = ft_split(str, ',');
 	if (!check_arg_format(components, 3, check_double))

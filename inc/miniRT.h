@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:06:15 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 16:07:13 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/12/30 19:21:23 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ bool			check_split_length(char **tokens, int expected_length);
 bool			check_arg_format(char **tokens, int expected_length,
 					bool (*check_func)(const char *));
 bool			check_ranged(double value, double min, double max);
+bool			check_range_vec3(t_vec3 vec, double min, double max);
 
 /* UTILS */
 bool			put_error(char *message);
@@ -51,6 +52,10 @@ bool			initialize_scene(char *filename, t_scene *scene);
 bool			read_file(char *filename, t_scene *scene);
 bool			parse_ambient_light(char **tokens, t_scene *scene);
 bool			parse_camera(char **tokens, t_scene *scene);
+bool			parse_light(char **tokens, t_scene *scene);
+bool			parse_sphere(char **tokens, t_scene *scene);
+bool			parse_plane(char **tokens, t_scene *scene);
+bool			parse_cylinder(char **tokens, t_scene *scene);
 bool			parse_vec3(char *str, t_vec3 *vec);
 bool			parse_rgb(char *str, t_rgb *color);
 

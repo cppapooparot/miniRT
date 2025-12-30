@@ -8,6 +8,7 @@ SRCS =	main.c \
 		src/parser/parse_light.c \
 		src/parser/parse_camera.c \
 		src/parser/parser_utils.c \
+		src/parser/parse_objects.c \
 		src/parser/validate_file.c \
 		src/parser/validate_arguments.c \
 		src/initializer.c \
