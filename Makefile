@@ -3,7 +3,14 @@ CFLAGS= -Wall -Wextra -Werror
 MLX_FLAGS= -lXext -lX11 -lm -lz
 DEBUG_FLAGS=-g3 -fsanitize=address,undefined,leak -D DEBUG
 
-SRCS =	main.c
+SRCS =	main.c \
+		src/parser/parser.c \
+		src/parser/parse_light.c \
+		src/parser/parse_camera.c \
+		src/parser/parser_utils.c \
+		src/parser/validate_file.c \
+		src/parser/validate_arguments.c \
+		src/initializer.c \
 
 # Object files
 OBJDIR=obj
@@ -35,21 +42,21 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@echo "$(GREEN)miniRT compiled$(RESET)"
 
 $(LIBFT):
-	@make complete -C $(LIBFT_DIR)
+	@make complete -C $(LIBFT_DIR) > /dev/null
 	@echo "$(GREEN)Libft compiled$(RESET)"
 
 $(MLX):
-	@make -C $(MLX_PATH)
+	@make -C $(MLX_PATH) > /dev/null
 	@echo "$(GREEN)MLX compiled$(RESET)"
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I $(MLX_PATH) -I $(LIBFT_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(MLX_PATH) -I $(LIBFT_DIR) -c $< -o $@
 	@echo "$(BLUE)Compiling $<...$(RESET)"
 
 $(OBJDIR)/%.debug.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(DEBUG_FLAGS) -I $(MLX_PATH) -I $(LIBFT_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) $(DEBUG_FLAGS) -I $(MLX_PATH) -I $(LIBFT_DIR) -c $< -o $@
 	@echo "$(CYAN)Compiling $< with debug flags...$(RESET)"
 	
 debug: $(DEBUG_OBJS) $(LIBFT) $(MLX)
@@ -57,13 +64,15 @@ debug: $(DEBUG_OBJS) $(LIBFT) $(MLX)
 	@echo "$(CYAN)miniRT compiled with debug flags$(RESET)"
 
 clean:
-	rm -f $(OBJS)
-	make clean -C $(LIBFT_DIR)
+	@rm -f $(OBJS)
+	@make clean -C $(LIBFT_DIR)
+	@echo "$(YELLOW)Object files cleaned.$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C $(LIBFT_DIR)
-	make clean -C $(MLX_PATH)
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFT_DIR) > /dev/null
+	@make clean -C $(MLX_PATH) > /dev/null
+	@echo "$(RED)Executable cleaned.$(RESET)"
 
 re: fclean all
 

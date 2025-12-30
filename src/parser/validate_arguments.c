@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_arguments.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/30 15:43:08 by maghumya          #+#    #+#             */
+/*   Updated: 2025/12/30 16:02:55 by maghumya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/miniRT.h"
+
+bool	check_arg_format(char **tokens, int len,
+		bool (*check_func)(const char *))
+{
+	int	index;
+
+	if (!check_split_length(tokens, len))
+		return (false);
+	index = -1;
+	while (++index < len)
+		if (!check_func(tokens[index]))
+			return (false);
+	return (true);
+}
+
+bool	check_rgb_values(int r, int g, int b)
+{
+	if (r < 0 || r > 255)
+		return (false);
+	if (g < 0 || g > 255)
+		return (false);
+	if (b < 0 || b > 255)
+		return (false);
+	return (true);
+}
+
+bool	check_ranged(double value, double min, double max)
+{
+	if (value < min || value > max)
+		return (false);
+	return (true);
+}
