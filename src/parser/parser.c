@@ -29,6 +29,20 @@ static t_parse_fn	get_parser(char *identifier)
 	return (NULL);
 }
 
+static bool	check_trim(char *line)
+{
+	char	*trimmed_line;
+
+	trimmed_line = ft_strtrim(line, "\n");
+	if (trimmed_line[0] == '\0')
+	{
+		free(trimmed_line);
+		return (true);
+	}
+	free(trimmed_line);
+	return (false);
+}
+
 static bool	parse_line(char *line, t_scene *scene)
 {
 	char		**line_tokens;
@@ -41,7 +55,7 @@ static bool	parse_line(char *line, t_scene *scene)
 		ft_free_array((void ***)&line_tokens);
 		return (put_error("Empty line or invalid format\n"));
 	}
-	if (ft_strtrim(line_tokens[0], "\n")[0] == '\0')
+	if (check_trim(line_tokens[0]))
 		return (ft_free_array((void ***)&line_tokens), true);
 	parser = get_parser(line_tokens[0]);
 	if (!parser)
