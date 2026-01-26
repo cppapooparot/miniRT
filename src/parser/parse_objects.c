@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:06:52 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/26 15:57:34 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:22:56 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ bool	parse_plane(char **tokens, t_scene *scene)
 	if (!check_range_vec3(plane->normal, -1.0, 1.0))
 		return (free(plane),
 			put_error("Plane normal vector must be in range [-1,1]\n"));
+	if (vec3_length(plane->normal) < 0.0001)
+		return (put_error("Direction cannot be zero\n"));
+	plane->normal = vec3_normalize(plane->normal);
 	if (!parse_rgb(tokens[3], &plane->color))
 		return (free(plane), false);
 	new_plane_node = ft_lstnew(plane);
@@ -72,6 +75,9 @@ static bool	parse_cylinder_args(char **tokens, t_cylinder *cylinder)
 		return (false);
 	if (!check_range_vec3(cylinder->axis, -1.0, 1.0))
 		return (put_error("Cylinder axis vector must be in range [-1,1]\n"));
+	if (vec3_length(cylinder->axis) < 0.0001)
+		return (put_error("Direction cannot be zero\n"));
+	cylinder->axis = vec3_normalize(cylinder->axis);
 	if (!check_double(tokens[3]) || !check_double(tokens[4]))
 		return (put_error("Invalid cylinder dimensions\n"));
 	cylinder->diameter = ft_atod(tokens[3]);
