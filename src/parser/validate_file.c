@@ -6,11 +6,14 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:44:02 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 19:16:08 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:56:02 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/miniRT.h"
+#include "../../inc/parser.h"
+#include "../../libft/libft.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 bool	check_file_extension(char *filename)
 {

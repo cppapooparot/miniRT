@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:10:34 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 18:23:32 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:57:29 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/miniRT.h"
+#include "../../inc/parser.h"
 
 bool	parse_ambient_light(char **tokens, t_scene *scene)
 {

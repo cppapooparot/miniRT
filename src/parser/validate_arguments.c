@@ -6,11 +6,12 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:43:08 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 19:17:03 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:56:15 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/miniRT.h"
+#include "../../inc/parser.h"
+#include "../../libft/libft.h"
 
 bool	check_arg_format(char **tokens, int len,
 		bool (*check_func)(const char *))

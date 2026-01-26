@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:20:14 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 19:21:23 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:57:22 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/miniRT.h"
+#include "../../inc/parser.h"
 
 static bool	parse_camera_args(char **tokens, t_scene *scene)
 {

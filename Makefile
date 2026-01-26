@@ -11,6 +11,7 @@ SRCS =	main.c \
 		src/parser/parse_objects.c \
 		src/parser/validate_file.c \
 		src/parser/validate_arguments.c \
+		src/render/window.c \
 		src/vec3d/vec3_arithmetics.c \
 		src/vec3d/vec3_products.c \
 		src/vec3d/vec3_utils.c \

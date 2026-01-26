@@ -6,11 +6,13 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:15:26 by maghumya          #+#    #+#             */
-/*   Updated: 2025/12/30 19:15:58 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:51:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "../inc/parser.h"
+#include "../inc/scene.h"
+#include "../libft/libft.h"
 
 bool	initialize_scene(char *filename, t_scene *scene)
 {
@@ -23,5 +25,16 @@ bool	initialize_scene(char *filename, t_scene *scene)
 	scene->cylinders = NULL;
 	if (!read_file(filename, scene))
 		return (false);
+	return (true);
+}
+
+bool	clean_scene(t_scene *scene)
+{
+	ft_lstclear(&scene->lights, free);
+	ft_lstclear(&scene->spheres, free);
+	ft_lstclear(&scene->planes, free);
+	ft_lstclear(&scene->cylinders, free);
+	if (scene->camera)
+		free(scene->camera);
 	return (true);
 }
