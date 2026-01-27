@@ -25,7 +25,7 @@ typedef struct s_hit_record
 
 typedef struct s_sphere_intersect
 {
-    double        epsilon;
+    double              epsilon;
     t_vec3			    oc;  // vector from centre of the spthere to start of the ray
     double			    a;
     double			    b;

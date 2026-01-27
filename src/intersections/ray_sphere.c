@@ -1,8 +1,25 @@
 #include "../../inc/intersections.h"
 #include <math.h>
 
-#include "../../inc/intersections.h"
-#include <math.h>
+static bool	sp_init(t_sphere_intersect *sp, t_ray ray, t_sphere *sphere)
+{
+    if (!sp || !sphere)
+        return (false);
+    sp->epsilon = 1e-6;
+    sp->oc = vec3_subtract(ray.origin, sphere->center);
+    sp->a = vec3_dot(ray.direction, ray.direction);
+    if (sp->a < sp->epsilon)
+        return (false);
+    sp->b = 2.0 * vec3_dot(sp->oc, ray.direction);
+    sp->c = vec3_dot(sp->oc, sp->oc) - (sphere->radius * sphere->radius);
+    sp->discriminant = (sp->b * sp->b) - (4.0 * sp->a * sp->c);
+    if (sp->discriminant < 0.0)
+        return (false);
+    sp->sqrt_d = sqrt(sp->discriminant);
+    sp->t0 = (-sp->b - sp->sqrt_d) / (2.0 * sp->a);
+    sp->t1 = (-sp->b + sp->sqrt_d) / (2.0 * sp->a);
+    return (true);
+}
 
 bool	intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
 {
@@ -10,18 +27,8 @@ bool	intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
 
     if (!sphere || !t)
         return (false);
-    sp.epsilon = 1e-6;
-
-    sp.oc = vec3_subtract(ray.origin, sphere->center);
-    sp.a = vec3_dot(ray.direction, ray.direction);
-    sp.b = 2.0 * vec3_dot(sp.oc, ray.direction);
-    sp.c = vec3_dot(sp.oc, sp.oc) - (sphere->radius * sphere->radius);
-    sp.discriminant = (sp.b * sp.b) - (4.0 * sp.a * sp.c);
-    if (sp.discriminant < 0.0)
+    if (!sp_init(&sp, ray, sphere))
         return (false);
-    sp.sqrt_d = sqrt(sp.discriminant);
-    sp.t0 = (-sp.b - sp.sqrt_d) / (2.0 * sp.a);
-    sp.t1 = (-sp.b + sp.sqrt_d) / (2.0 * sp.a);
     if (sp.t0 > sp.epsilon && sp.t1 > sp.epsilon)
     {
         if (sp.t0 < sp.t1)
@@ -35,6 +42,5 @@ bool	intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
         *t = sp.t1;
     else
         return (false);
-
     return (true);
 }
