@@ -17,6 +17,7 @@ SRCS =	main.c \
 		src/vec3d/vec3_utils.c \
 		src/vec3d/rgb_utils.c \
 		src/initializer.c \
+		src/intersections/ray_sphere.c \
 
 # Object files
 OBJDIR=obj
