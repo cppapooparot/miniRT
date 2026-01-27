@@ -6,13 +6,16 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:08:23 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/24 18:53:10 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:24:58 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3D_H
 # define VEC3D_H
 
+# ifndef _USE_MATH_DEFINES
+#  define _USE_MATH_DEFINES
+# endif
 # include <math.h>
 
 typedef struct s_vec3
@@ -21,6 +24,13 @@ typedef struct s_vec3
 	double	y;
 	double	z;
 }			t_vec3;
+
+typedef struct s_basis
+{
+	t_vec3	u;
+	t_vec3	v;
+	t_vec3	w;
+}			t_basis;
 
 typedef struct s_rgb
 {
@@ -41,6 +51,7 @@ t_vec3		vec3_scale(t_vec3 a, double scalar);
 t_vec3		vec3_div(t_vec3 a, double scalar);
 double		vec3_dot(t_vec3 a, t_vec3 b);
 t_vec3		vec3_cross(t_vec3 a, t_vec3 b);
+t_vec3		vec3_negate(t_vec3 a);
 double		vec3_length(t_vec3 a);
 double		vec3_length_squared(t_vec3 a);
 t_vec3		vec3_normalize(t_vec3 a);
