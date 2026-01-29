@@ -6,21 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 17:27:37 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/24 18:53:54 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/27 01:45:42 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
-
-double	vec3_length_squared(t_vec3 a)
-{
-	return (a.x * a.x + a.y * a.y + a.z * a.z);
-}
-
-double	vec3_length(t_vec3 a)
-{
-	return (sqrt(vec3_length_squared(a)));
-}
 
 t_vec3	vec3_normalize(t_vec3 a)
 {

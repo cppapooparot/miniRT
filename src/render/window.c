@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 00:31:42 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/26 15:53:44 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:02:33 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/render.h"
+#include "../../inc/window.h"
 #include "../../inc/scene.h"
 #include <stdlib.h>
 
