@@ -1,7 +1,7 @@
 #include "../../inc/intersections.h"
 #include <math.h>
 
-static bool	sp_init(t_sphere_intersect *sp, t_ray ray, t_sphere *sphere)
+static bool	sp_calculate(t_sphere_intersect *sp, t_ray ray, t_sphere *sphere)
 {
     if (!sp || !sphere)
         return (false);
@@ -27,7 +27,7 @@ bool	intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
 
     if (!sphere || !t)
         return (false);
-    if (!sp_init(&sp, ray, sphere))
+    if (!sp_calculate(&sp, ray, sphere))
         return (false);
     if (sp.t0 > sp.epsilon && sp.t1 > sp.epsilon)
     {
