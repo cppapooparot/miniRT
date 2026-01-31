@@ -5,6 +5,8 @@
 # include "vec3d.h"
 # include <stdbool.h>
 
+# define EPSILON 1e-6
+
 typedef enum e_hit_type
 {
     HIT_NONE = 0,
@@ -25,7 +27,6 @@ typedef struct s_hit_record
 
 typedef struct s_sphere_intersect
 {
-    double              epsilon;
     t_vec3			    oc;  // vector from centre of the sphere to start of the ray
     double			    a;
     double			    b;
