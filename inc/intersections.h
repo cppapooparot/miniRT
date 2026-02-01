@@ -4,6 +4,8 @@
 # include "scene.h"
 # include "vec3d.h"
 # include <stdbool.h>
+# include <math.h>
+# include <float.h>
 
 # define EPSILON 1e-6
 
