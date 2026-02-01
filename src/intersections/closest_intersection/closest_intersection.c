@@ -1,5 +1,5 @@
-#include "../../inc/intersections.h"
-#include "../../libft/libft.h"
+#include "../../../inc/intersections.h"
+#include "../../../libft/libft.h"
 
 static t_vec3	vec3_normalize_safe(t_vec3 v)
 {

@@ -1,5 +1,4 @@
-#include "../../inc/intersections.h"
-#include <math.h>
+#include "../../../inc/intersections.h"
 
 static bool	sp_calculate(t_sphere_intersect *sp, t_ray ray, t_sphere *sphere)
 {

@@ -1,5 +1,4 @@
-#include "../../inc/intersections.h"
-#include <math.h>
+#include "../../../inc/intersections.h"
 
 bool    intersect_plane(t_ray ray, t_plane *plane, double *t)
 {

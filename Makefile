@@ -18,10 +18,12 @@ SRCS =	main.c \
 		src/vec3d/vec3_utils.c \
 		src/vec3d/rgb_utils.c \
 		src/initializer.c \
-		src/intersections/ray_sphere.c \
-		src/intersections/ray_plane.c \
-		src/intersections/ray_cylinder.c \
-		src/intersections/closest_intersection.c \
+		src/intersections/sphere/ray_sphere.c \
+		src/intersections/plane/ray_plane.c \
+		src/intersections/cylinder/ray_cylinder.c \
+		src/intersections/cylinder/cylinder_utils1.c \
+		src/intersections/cylinder/cylinder_utils2.c \
+		src/intersections/closest_intersection/closest_intersection.c \
 
 # Object files
 OBJDIR=obj
