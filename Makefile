@@ -20,6 +20,8 @@ SRCS =	main.c \
 		src/initializer.c \
 		src/intersections/ray_sphere.c \
 		src/intersections/ray_plane.c \
+		src/intersections/ray_cylinder.c \
+		src/intersections/closest_intersection.c \
 
 # Object files
 OBJDIR=obj
