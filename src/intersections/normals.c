@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 21:42:48 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/31 16:44:03 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/02 16:37:52 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,28 @@
 #include "../../inc/scene.h"
 #include "../../inc/vec3d.h"
 
-t_vec3	get_plane_normal(t_plane *plane, t_vec3 point)
+static t_vec3	face_forward(t_vec3 n, t_vec3 ray_dir)
 {
-	(void)point;
-	return (vec3_normalize(plane->normal));
+	if (vec3_dot(n, ray_dir) > 0.0)
+		return (vec3_scale(n, -1.0));
+	return (n);
 }
 
-t_vec3	get_sphere_normal(t_sphere *sphere, t_vec3 point)
+t_vec3	get_plane_normal(t_plane *plane, t_vec3 point, t_vec3 ray_dir)
+{
+	(void)point;
+	return (face_forward(vec3_normalize(plane->normal), ray_dir));
+}
+
+t_vec3	get_sphere_normal(t_sphere *sphere, t_vec3 point, t_vec3 ray_dir)
 {
 	t_vec3	normal;
 
 	normal = vec3_subtract(point, sphere->center);
-	return (vec3_normalize(normal));
+	return (face_forward(vec3_normalize(normal), ray_dir));
 }
 
-t_vec3	get_cylinder_normal(t_cylinder *cylinder, t_vec3 point)
+t_vec3	get_cylinder_normal(t_cylinder *cylinder, t_vec3 point, t_vec3 ray_dir)
 {
 	t_vec3	normal;
 	t_vec3	center_to_point;
@@ -45,5 +52,5 @@ t_vec3	get_cylinder_normal(t_cylinder *cylinder, t_vec3 point)
 	}
 	normal = vec3_subtract(center_to_point, vec3_scale(cylinder->axis,
 				proj_length));
-	return (vec3_normalize(normal));
+	return (face_forward(vec3_normalize(normal), ray_dir));
 }

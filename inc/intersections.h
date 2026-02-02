@@ -4,6 +4,8 @@
 # include "../libft/libft.h"
 # include "scene.h"
 # include "vec3d.h"
+# include <float.h>
+# include <math.h>
 # include <stdbool.h>
 
 typedef enum e_hit_type
@@ -29,7 +31,6 @@ typedef struct s_hit_record
 
 typedef struct s_sphere_intersect
 {
-	double		epsilon;
 	t_vec3 oc; // vector from centre of the sphere to start of the ray
 	double		a;
 	double		b;
@@ -40,11 +41,67 @@ typedef struct s_sphere_intersect
 	double		t1;
 }				t_sphere_intersect;
 
+typedef struct s_disk_intersect
+{
+	double		denom;
+	double		t;
+	t_vec3		p;
+	t_vec3		v;
+	t_vec3		in_plane;
+	double		dist_square;
+}				t_disk_intersect;
+
+typedef struct s_cy_ctx
+{
+	t_vec3		axis;
+	double		radius;
+	double		half_h;
+}				t_cy_ctx;
+
+typedef struct s_cy_body
+{
+	t_vec3		oc;
+	double		d_dot_a;
+	double		oc_dot_a;
+	t_vec3		d_perp;
+	t_vec3		oc_perp;
+	double		a;
+	double		b;
+	double		c;
+	double		disc;
+	double		sqrt_disc;
+	double		t0;
+	double		t1;
+}				t_cy_body;
+
 bool			intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
 bool			intersect_plane(t_ray ray, t_plane *plane, double *t);
 bool			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
 
 bool			find_closest_intersection(t_ray ray, t_scene *scene,
 					t_hit_record *rec);
+
+/*utils*/
+
+// cylinder
+t_vec3			ray_point_at(t_ray ray, double t);
+t_vec3			project_on_axis(t_vec3 v, t_vec3 axis);
+void			cylinder_ctx_init(t_cy_ctx *ctx, t_cylinder *cylinder);
+void			cylinder_body_init(t_cy_body *b, t_ray ray,
+					t_cylinder *cylinder, t_cy_ctx *ctx);
+bool			cylinder_body_solve(t_cy_body *b);
+bool			cylinder_body_hit(t_ray ray, t_cylinder *cylinder,
+					t_cy_ctx *ctx, double *t_hit);
+bool			cylinder_disk_hit(t_ray ray, t_cylinder *cylinder,
+					t_cy_ctx *ctx, double *t_hit);
+bool			intersect_disk(t_ray ray, t_vec3 disk_center,
+					t_vec3 disk_normal, double radius, double *t_hit);
+
+/* normals */
+t_vec3			get_plane_normal(t_plane *plane, t_vec3 point, t_vec3 ray_dir);
+t_vec3			get_sphere_normal(t_sphere *sphere, t_vec3 point,
+					t_vec3 ray_dir);
+t_vec3			get_cylinder_normal(t_cylinder *cylinder, t_vec3 point,
+					t_vec3 ray_dir);
 
 #endif

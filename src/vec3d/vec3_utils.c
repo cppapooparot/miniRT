@@ -6,17 +6,20 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 17:27:37 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/27 01:45:42 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/02 02:05:00 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
+#include "../../inc/vec3d.h"
 
 t_vec3	vec3_normalize(t_vec3 a)
 {
 	double	length;
 
 	length = vec3_length(a);
+	if (length < EPSILON)
+		return ((t_vec3){0, 0, 0});
 	return (vec3_div(a, length));
 }
 

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:08:23 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/27 14:24:58 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/02 02:04:50 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define _USE_MATH_DEFINES
 # endif
 # include <math.h>
+# define EPSILON 1e-6
 
 typedef struct s_vec3
 {
