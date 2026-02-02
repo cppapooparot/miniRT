@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:19:45 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/26 15:58:31 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../inc/miniRT.h"
 
 static t_parse_fn	get_parser(char *identifier)
 {
@@ -56,6 +56,8 @@ static bool	parse_line(char *line, t_scene *scene)
 		return (put_error("Empty line or invalid format\n"));
 	}
 	if (check_trim(line_tokens[0]))
+		return (ft_free_array((void ***)&line_tokens), true);
+	if (line_tokens[0][0] == '#')
 		return (ft_free_array((void ***)&line_tokens), true);
 	parser = get_parser(line_tokens[0]);
 	if (!parser)

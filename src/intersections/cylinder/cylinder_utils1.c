@@ -1,4 +1,4 @@
-#include "../../../inc/intersections.h"
+#include "../../../inc/miniRT.h"
 
 t_vec3	ray_point_at(t_ray ray, double t)
 {

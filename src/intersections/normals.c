@@ -6,13 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 21:42:48 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/02 16:37:52 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/objects.h"
-#include "../../inc/scene.h"
-#include "../../inc/vec3d.h"
+#include "../../inc/miniRT.h"
 
 static t_vec3	face_forward(t_vec3 n, t_vec3 ray_dir)
 {

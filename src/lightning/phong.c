@@ -6,13 +6,13 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 18:38:34 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/31 19:46:25 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:20 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/intersections.h"
+#include "../../inc/miniRT.h"
 
-t_rgb	calculate_ambient(t_scene *scene, t_hit_record *record)
+static t_rgb	calculate_ambient(t_scene *scene, t_hit_record *record)
 {
 	t_rgb	ambient_color;
 
@@ -21,7 +21,7 @@ t_rgb	calculate_ambient(t_scene *scene, t_hit_record *record)
 	return (ambient_color);
 }
 
-t_rgb	calculate_diffuse(t_light *light, t_hit_record *record)
+static t_rgb	calculate_diffuse(t_light *light, t_hit_record *record)
 {
 	t_vec3	light_dir;
 	double	diffuse_intensity;
@@ -35,16 +35,37 @@ t_rgb	calculate_diffuse(t_light *light, t_hit_record *record)
 	return (diffuse_color);
 }
 
+static bool	is_in_shadow(t_scene *scene, t_vec3 point, t_light *light)
+{
+	t_ray			shadow_ray;
+	t_hit_record	shadow_record;
+	t_vec3			to_light;
+	double			light_distance;
+
+	to_light = vec3_subtract(light->position, point);
+	light_distance = vec3_length(to_light);
+	shadow_ray.origin = point;
+	shadow_ray.direction = vec3_normalize(to_light);
+	if (find_closest_intersection(shadow_ray, scene, &shadow_record))
+		if (shadow_record.t < light_distance)
+			return (true);
+	return (false);
+}
+
 t_rgb	calculate_light(t_scene *scene, t_hit_record *record)
 {
-	t_rgb final_color;
-	t_list *lights = scene->lights;
+	t_rgb	final_color;
+	t_list	*lights;
+	t_light	*light;
 
+	lights = scene->lights;
 	final_color = calculate_ambient(scene, record);
 	while (lights)
 	{
-		t_light *light = (t_light *)lights->content;
-		final_color = rgb_add(final_color, calculate_diffuse(light, record));
+		light = (t_light *)lights->content;
+		if (!is_in_shadow(scene, record->point, light))
+			final_color = rgb_add(final_color, calculate_diffuse(light,
+						record));
 		lights = lights->next;
 	}
 	return (rgb_clamp(final_color));

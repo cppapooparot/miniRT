@@ -6,12 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 14:07:51 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/27 20:28:43 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
-#include "../../inc/scene.h"
 
 t_viewport	setup_viewport(t_camera *camera, int image_width, int image_height)
 {

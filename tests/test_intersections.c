@@ -1,6 +1,4 @@
-#include "../inc/intersections.h"
-#include <stdio.h>
-#include <math.h>
+#include "../inc/miniRT.h"
 
 /* 
   cc -Wall -Wextra -Werror \

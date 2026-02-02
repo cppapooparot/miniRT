@@ -6,12 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 17:27:37 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/02 02:05:00 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/miniRT.h"
-#include "../../inc/vec3d.h"
 
 t_vec3	vec3_normalize(t_vec3 a)
 {

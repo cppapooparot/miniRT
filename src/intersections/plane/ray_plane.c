@@ -1,4 +1,4 @@
-#include "../../../inc/intersections.h"
+#include "../../../inc/miniRT.h"
 
 bool    intersect_plane(t_ray ray, t_plane *plane, double *t)
 {

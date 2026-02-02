@@ -13,6 +13,7 @@ SRCS =	main.c \
 		src/parser/validate_arguments.c \
 		src/render/window.c \
 		src/render/camera.c \
+		src/render/ray_tracer.c \
 		src/vec3d/vec3_arithmetics.c \
 		src/vec3d/vec3_products.c \
 		src/vec3d/vec3_utils.c \
@@ -25,6 +26,7 @@ SRCS =	main.c \
 		src/intersections/cylinder/cylinder_utils2.c \
 		src/intersections/closest_intersection/closest_intersection.c \
 		src/intersections/normals.c \
+		src/lightning/phong.c \
 
 # Object files
 OBJDIR=obj

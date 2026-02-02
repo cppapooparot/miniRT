@@ -1,4 +1,4 @@
-#include "../../../inc/intersections.h"
+#include "../../../inc/miniRT.h"
 
 bool	cylinder_body_hit(t_ray ray, t_cylinder *cylinder, t_cy_ctx *ctx,
 		double *t_hit)

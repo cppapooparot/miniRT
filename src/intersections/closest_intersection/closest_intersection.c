@@ -1,5 +1,4 @@
-#include "../../../inc/intersections.h"
-#include "../../../libft/libft.h"
+#include "../../../inc/miniRT.h"
 
 static void	check_sphere_intersections(t_ray ray, t_list *spheres,
 		double *best_t, t_hit_record *rec)

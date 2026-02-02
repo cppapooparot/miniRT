@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:06:52 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/26 19:22:56 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parser.h"
+#include "../../inc/miniRT.h"
 
 bool	parse_sphere(char **tokens, t_scene *scene)
 {

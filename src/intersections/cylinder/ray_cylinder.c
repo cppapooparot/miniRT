@@ -1,4 +1,4 @@
-#include "../../../inc/intersections.h"
+#include "../../../inc/miniRT.h"
 
 bool	intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t)
 {

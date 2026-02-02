@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 17:07:00 by maghumya          #+#    #+#             */
-/*   Updated: 2026/01/27 20:32:28 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/vec3d.h"
+#include "../../inc/miniRT.h"
 
 double	vec3_dot(t_vec3 a, t_vec3 b)
 {

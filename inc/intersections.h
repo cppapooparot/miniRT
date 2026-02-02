@@ -1,11 +1,7 @@
 #ifndef INTERSECTIONS_H
 # define INTERSECTIONS_H
 
-# include "../libft/libft.h"
 # include "scene.h"
-# include "vec3d.h"
-# include <float.h>
-# include <math.h>
 # include <stdbool.h>
 
 typedef enum e_hit_type
