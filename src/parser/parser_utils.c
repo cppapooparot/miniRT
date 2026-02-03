@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:14:30 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:45:37 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	put_error(char *message)
 {
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
 	return (false);
 }
