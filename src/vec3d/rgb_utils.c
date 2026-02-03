@@ -16,30 +16,33 @@ t_rgb	rgb_add(t_rgb a, t_rgb b)
 {
 	t_rgb	result;
 
+	result = (t_rgb){0, 0, 0};
 	result.r = a.r + b.r;
 	result.g = a.g + b.g;
 	result.b = a.b + b.b;
-	return (result);
+	return (rgb_clamp(result));
 }
 
 t_rgb	rgb_scale(t_rgb color, double scalar)
 {
 	t_rgb	result;
 
+	result = (t_rgb){0, 0, 0};
 	result.r = (int)(color.r * scalar);
 	result.g = (int)(color.g * scalar);
 	result.b = (int)(color.b * scalar);
-	return (result);
+	return (rgb_clamp(result));
 }
 
 t_rgb	rgb_multiply(t_rgb a, t_rgb b)
 {
 	t_rgb	result;
 
+	result = (t_rgb){0, 0, 0};
 	result.r = (a.r * b.r) / 255;
 	result.g = (a.g * b.g) / 255;
 	result.b = (a.b * b.b) / 255;
-	return (result);
+	return (rgb_clamp(result));
 }
 
 t_rgb	rgb_clamp(t_rgb color)

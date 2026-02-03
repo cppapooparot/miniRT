@@ -26,11 +26,11 @@ t_viewport	setup_viewport(t_camera *camera, int image_width, int image_height)
 	viewport.focal_length = 1.0;
 	viewport.height = 2.0 * tan((camera->fov * 0.5) * (M_PI / 180.0));
 	viewport.width = aspect_ratio * viewport.height;
-	camera_basis.w = vec3_negate(camera->direction);
+	camera_basis.w = vec3_normalize(vec3_negate(camera->direction));
 	camera_basis.u = vec3_normalize(vec3_cross(up, camera_basis.w));
 	camera_basis.v = vec3_cross(camera_basis.w, camera_basis.u);
 	viewport.horizontal = vec3_scale(camera_basis.u, viewport.width);
-	viewport.vertical = vec3_scale(camera_basis.v, viewport.height);
+	viewport.vertical = vec3_scale(camera_basis.v, -viewport.height);
 	viewport.center = vec3_add(camera->position, vec3_scale(camera->direction,
 				viewport.focal_length));
 	viewport.upper_left = viewport.center;

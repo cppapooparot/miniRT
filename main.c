@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	}
 	if (!initialize_scene(argv[1], &data.scene))
 		return (1);
-	if (!initialize_window(&data.mlx, 800, 600))
+	if (!initialize_window(&data.mlx, 1080, 720))
 		return (clean_scene(&data.scene), 1);
 	mlx_key_hook(data.mlx.win, handle_keypress, &data);
 	mlx_hook(data.mlx.win, 17, 0, handle_close, &data);

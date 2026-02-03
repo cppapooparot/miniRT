@@ -35,19 +35,20 @@ static t_rgb	calculate_diffuse(t_light *light, t_hit_record *record)
 	return (diffuse_color);
 }
 
-static bool	is_in_shadow(t_scene *scene, t_vec3 point, t_light *light)
+static bool	is_in_shadow(t_scene *scene, t_hit_record *record, t_light *light)
 {
 	t_ray			shadow_ray;
 	t_hit_record	shadow_record;
 	t_vec3			to_light;
 	double			light_distance;
 
-	to_light = vec3_subtract(light->position, point);
+	to_light = vec3_subtract(light->position, record->point);
 	light_distance = vec3_length(to_light);
-	shadow_ray.origin = point;
+	shadow_ray.origin = vec3_add(record->point, vec3_scale(record->normal,
+				SHADOW_EPSILON));
 	shadow_ray.direction = vec3_normalize(to_light);
 	if (find_closest_intersection(shadow_ray, scene, &shadow_record))
-		if (shadow_record.t < light_distance)
+		if (shadow_record.t < light_distance - SHADOW_EPSILON)
 			return (true);
 	return (false);
 }
@@ -63,7 +64,7 @@ t_rgb	calculate_light(t_scene *scene, t_hit_record *record)
 	while (lights)
 	{
 		light = (t_light *)lights->content;
-		if (!is_in_shadow(scene, record->point, light))
+		if (!is_in_shadow(scene, record, light))
 			final_color = rgb_add(final_color, calculate_diffuse(light,
 						record));
 		lights = lights->next;

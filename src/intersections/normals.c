@@ -44,9 +44,10 @@ t_vec3	get_cylinder_normal(t_cylinder *cylinder, t_vec3 point, t_vec3 ray_dir)
 	if (fabs(proj_length) >= (cylinder->height / 2))
 	{
 		if (proj_length > 0)
-			return (vec3_normalize(cylinder->axis));
+			return (face_forward(vec3_normalize(cylinder->axis), ray_dir));
 		else
-			return (vec3_normalize(vec3_scale(cylinder->axis, -1)));
+			return (face_forward(vec3_normalize(vec3_scale(cylinder->axis, -1)),
+					ray_dir));
 	}
 	normal = vec3_subtract(center_to_point, vec3_scale(cylinder->axis,
 				proj_length));

@@ -20,6 +20,7 @@
 # include <math.h>
 
 # define EPSILON 1e-6
+# define SHADOW_EPSILON 1e-4
 
 typedef struct s_vec3
 {
