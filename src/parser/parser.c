@@ -29,18 +29,17 @@ static t_parse_fn	get_parser(char *identifier)
 	return (NULL);
 }
 
-static bool	check_trim(char *line)
+static char	*check_trim(char *line)
 {
 	char	*trimmed_line;
 
-	trimmed_line = ft_strtrim(line, "\n");
-	if (trimmed_line[0] == '\0')
+	trimmed_line = ft_strtrim(line, " \t\n");
+	if (trimmed_line[0] == '\0' || trimmed_line[0] == '#')
 	{
 		free(trimmed_line);
-		return (true);
+		return (NULL);
 	}
-	free(trimmed_line);
-	return (false);
+	return (trimmed_line);
 }
 
 static bool	parse_line(char *line, t_scene *scene)
@@ -55,10 +54,6 @@ static bool	parse_line(char *line, t_scene *scene)
 		ft_free_array((void ***)&line_tokens);
 		return (put_error("Empty line or invalid format\n"));
 	}
-	if (check_trim(line_tokens[0]))
-		return (ft_free_array((void ***)&line_tokens), true);
-	if (line_tokens[0][0] == '#')
-		return (ft_free_array((void ***)&line_tokens), true);
 	parser = get_parser(line_tokens[0]);
 	if (!parser)
 	{
@@ -74,6 +69,7 @@ bool	read_file(char *filename, t_scene *scene)
 {
 	int		fd;
 	char	*line;
+	char	*trimmed_line;
 
 	if (!check_file_extension(filename))
 		return (put_error("File must have .rt extension\n"));
@@ -83,9 +79,14 @@ bool	read_file(char *filename, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!parse_line(line, scene))
-			return (free(line), close(fd), false);
+		trimmed_line = check_trim(line);
 		free(line);
+		if (trimmed_line)
+		{
+			if (!parse_line(trimmed_line, scene))
+				return (free(trimmed_line), close(fd), false);
+			free(trimmed_line);
+		}
 		line = get_next_line(fd);
 	}
 	close(fd);

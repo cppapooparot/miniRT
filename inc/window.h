@@ -16,6 +16,9 @@
 # include "../mlx/mlx.h"
 # include <stdbool.h>
 
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
+
 typedef struct s_data	t_data;
 
 typedef struct s_mlx
