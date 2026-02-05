@@ -2,10 +2,10 @@
 
 bool	intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t)
 {
-	double t_body;
-	double t_disk;
-	bool hit_body;
-	bool hit_disk;
+	double	t_body;
+	double	t_disk;
+	bool	hit_body;
+	bool	hit_disk;
 
 	if (!cylinder || !t)
 		return (false);

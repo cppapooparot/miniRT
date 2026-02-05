@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:08:23 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/05 22:11:49 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 22:32:34 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	t_vec3	point;
-	t_vec3 normal; // MUST be normalized
+	t_vec3	normal;
 	t_rgb	color;
 }			t_plane;
 
 typedef struct s_cylinder
 {
 	t_vec3	center;
-	t_vec3 axis; // MUST be normalized
+	t_vec3	axis;
 	double	radius;
 	double	half_height;
 	t_rgb	color;
@@ -77,15 +77,15 @@ typedef struct s_cylinder
 typedef struct s_light
 {
 	t_vec3	position;
-	double brightness; // [0.0, 1.0]
+	double	brightness;
 	t_rgb	color;
 }			t_light;
 
 typedef struct s_camera
 {
 	t_vec3	position;
-	t_vec3 direction; // MUST be normalized
-	int fov;          // Field of view (degrees)
+	t_vec3	direction;
+	int		fov;
 }			t_camera;
 
 t_vec3		vec3_add(t_vec3 a, t_vec3 b);

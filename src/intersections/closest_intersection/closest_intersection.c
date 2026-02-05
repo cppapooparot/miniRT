@@ -86,7 +86,7 @@ static void	check_cylinder_intersections(t_ray ray, t_list *cylinders,
 
 bool	find_closest_intersection(t_ray ray, t_scene *scene, t_hit_record *rec)
 {
-	double best_t;
+	double	best_t;
 
 	if (!scene || !rec)
 		return (false);

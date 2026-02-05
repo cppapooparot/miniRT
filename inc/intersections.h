@@ -15,7 +15,7 @@ typedef enum e_hit_type
 typedef struct s_hit_record
 {
 	bool		hit;
-	double t; // ray parameter
+	double		t;
 	t_vec3		point;
 	t_vec3		normal;
 	t_rgb		color;
@@ -27,7 +27,7 @@ typedef struct s_hit_record
 
 typedef struct s_sphere_intersect
 {
-	t_vec3 oc; // vector from centre of the sphere to start of the ray
+	t_vec3		oc;
 	double		a;
 	double		b;
 	double		c;
@@ -72,7 +72,7 @@ bool			find_closest_intersection(t_ray ray, t_scene *scene,
 
 /*utils*/
 
-// cylinder
+/*cylinder*/
 t_vec3			ray_point_at(t_ray ray, double t);
 t_vec3			project_on_axis(t_vec3 v, t_vec3 axis);
 void			cylinder_body_init(t_cy_body *b, t_ray ray,
