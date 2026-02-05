@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:06:15 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/03 02:24:37 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:45:53 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
+# include <errno.h>
 # include <float.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 
 # ifndef M_PI

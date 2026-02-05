@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:19:45 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/05 19:51:08 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:51:34 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ static bool	parse_line(char *line, t_scene *scene)
 	if (!line_tokens || !line_tokens[0])
 	{
 		ft_free_array((void ***)&line_tokens);
-		return (put_error("Empty line or invalid format\n"));
+		return (put_error("Empty line or invalid format"));
 	}
 	parser = get_parser(line_tokens[0]);
 	if (!parser)
 	{
 		ft_free_array((void ***)&line_tokens);
-		return (put_error("Unknown identifier\n"));
+		return (put_error("Unknown identifier"));
 	}
 	result = parser(line_tokens, scene);
 	ft_free_array((void ***)&line_tokens);
@@ -76,10 +76,10 @@ bool	read_file(char *filename, t_scene *scene)
 	char	*line;
 
 	if (!check_file_extension(filename))
-		return (put_error("File must have .rt extension\n"));
+		return (put_error("File must have .rt extension"));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error opening file"), false);
+		return (put_error("Error opening file"));
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -90,6 +90,6 @@ bool	read_file(char *filename, t_scene *scene)
 	}
 	close(fd);
 	if (!scene->camera)
-		return (put_error("Scene must have a camera defined\n"), false);
+		return (put_error("Scene must have a camera defined"));
 	return (true);
 }

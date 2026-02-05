@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 01:16:38 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/03 01:21:58 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:51:34 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		put_error("Invalid input\nUsage: ./miniRT path/to/[scene].rt\n");
+		put_error("Invalid input\nUsage: ./miniRT path/to/[scene].rt");
 		return (1);
 	}
 	if (!initialize_scene(argv[1], &data.scene))
-		return (1);
+		return (clean_scene(&data.scene), 1);
 	if (!initialize_window(&data.mlx, WIN_WIDTH, WIN_HEIGHT))
 		return (clean_scene(&data.scene), 1);
 	mlx_key_hook(data.mlx.win, handle_keypress, &data);
