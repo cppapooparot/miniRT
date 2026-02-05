@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:06:52 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/05 20:51:34 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 22:22:32 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ static bool	parse_cylinder_args(char **tokens, t_cylinder *cylinder)
 	cylinder->axis = vec3_normalize(cylinder->axis);
 	if (!check_double(tokens[3]) || !check_double(tokens[4]))
 		return (put_error("Invalid cylinder dimensions"));
-	cylinder->diameter = ft_atod(tokens[3]);
-	cylinder->height = ft_atod(tokens[4]);
-	if (cylinder->diameter <= 0 || cylinder->height <= 0)
+	cylinder->radius = ft_atod(tokens[3]) / 2.0;
+	cylinder->half_height = ft_atod(tokens[4]) / 2.0;
+	if (cylinder->radius <= 0 || cylinder->half_height <= 0)
 		return (put_error("Cylinder diameter and height must be positive"));
 	if (!parse_rgb(tokens[5], &cylinder->color))
 		return (false);

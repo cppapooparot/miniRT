@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 21:42:48 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/04 00:20:41 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 22:11:28 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@ t_vec3	get_cylinder_normal(t_cylinder *cylinder, t_vec3 point, t_vec3 ray_dir)
 	t_vec3	normal;
 	t_vec3	center_to_point;
 	double	proj_length;
-	double	half_height;
 
-	half_height = cylinder->height / 2.0;
 	center_to_point = vec3_subtract(point, cylinder->center);
 	proj_length = vec3_dot(center_to_point, cylinder->axis);
-	if (fabs(proj_length - half_height) < EPSILON)
+	if (fabs(proj_length - cylinder->half_height) < EPSILON)
 		return (face_forward(vec3_normalize(cylinder->axis), ray_dir));
-	else if (fabs(proj_length + half_height) < EPSILON)
+	else if (fabs(proj_length + cylinder->half_height) < EPSILON)
 		return (face_forward(vec3_normalize(vec3_scale(cylinder->axis, -1)),
 				ray_dir));
 	normal = vec3_subtract(center_to_point, vec3_scale(cylinder->axis,

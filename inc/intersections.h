@@ -47,13 +47,6 @@ typedef struct s_disk_intersect
 	double		dist_square;
 }				t_disk_intersect;
 
-typedef struct s_cy_ctx
-{
-	t_vec3		axis;
-	double		radius;
-	double		half_h;
-}				t_cy_ctx;
-
 typedef struct s_cy_body
 {
 	t_vec3		oc;
@@ -82,14 +75,13 @@ bool			find_closest_intersection(t_ray ray, t_scene *scene,
 // cylinder
 t_vec3			ray_point_at(t_ray ray, double t);
 t_vec3			project_on_axis(t_vec3 v, t_vec3 axis);
-void			cylinder_ctx_init(t_cy_ctx *ctx, t_cylinder *cylinder);
 void			cylinder_body_init(t_cy_body *b, t_ray ray,
-					t_cylinder *cylinder, t_cy_ctx *ctx);
+					t_cylinder *cylinder);
 bool			cylinder_body_solve(t_cy_body *b);
 bool			cylinder_body_hit(t_ray ray, t_cylinder *cylinder,
-					t_cy_ctx *ctx, double *t_hit);
+					double *t_hit);
 bool			cylinder_disk_hit(t_ray ray, t_cylinder *cylinder,
-					t_cy_ctx *ctx, double *t_hit);
+					double *t_hit);
 bool			intersect_disk(t_ray ray, t_vec3 disk_center,
 					t_vec3 disk_normal, double radius, double *t_hit);
 

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 19:08:23 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/03 02:24:39 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 22:11:49 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ typedef struct s_cylinder
 {
 	t_vec3	center;
 	t_vec3 axis; // MUST be normalized
-	double	diameter;
-	double	height;
+	double	radius;
+	double	half_height;
 	t_rgb	color;
 }			t_cylinder;
 

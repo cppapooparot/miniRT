@@ -80,7 +80,7 @@ debug: $(DEBUG_OBJS) $(LIBFT) $(MLX)
 	@echo "$(CYAN)miniRT compiled with debug flags$(RESET)"
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(DEBUG_OBJS)
 	@make clean -C $(LIBFT_DIR)
 	@echo "$(YELLOW)Object files cleaned.$(RESET)"
 

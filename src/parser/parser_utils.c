@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:14:30 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/05 20:51:34 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:59:38 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ bool	parse_rgb(char *str, t_rgb *color)
 	char	**components;
 
 	components = ft_split(str, ',');
+	if (!components)
+		return (put_error("Memory allocation failed\n"));
 	if (!check_arg_format(components, 3, check_integer))
 	{
 		ft_free_array((void ***)&components);
@@ -53,6 +55,8 @@ bool	parse_vec3(char *str, t_vec3 *vec)
 	char	**components;
 
 	components = ft_split(str, ',');
+	if (!components)
+		return (put_error("Memory allocation failed\n"));
 	if (!check_arg_format(components, 3, check_double))
 	{
 		ft_free_array((void ***)&components);
