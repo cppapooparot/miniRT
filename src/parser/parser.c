@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:19:45 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/02/05 19:51:08 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ static bool	parse_line(char *line, t_scene *scene)
 	char		**line_tokens;
 	t_parse_fn	parser;
 	bool		result;
+	char		*trimmed_line;
 
-	line_tokens = ft_split(line, ' ');
+	trimmed_line = check_trim(line);
+	if (!trimmed_line)
+		return (true);
+	line_tokens = ft_split(trimmed_line, ' ');
+	free(trimmed_line);
 	if (!line_tokens || !line_tokens[0])
 	{
 		ft_free_array((void ***)&line_tokens);
@@ -69,7 +74,6 @@ bool	read_file(char *filename, t_scene *scene)
 {
 	int		fd;
 	char	*line;
-	char	*trimmed_line;
 
 	if (!check_file_extension(filename))
 		return (put_error("File must have .rt extension\n"));
@@ -79,16 +83,13 @@ bool	read_file(char *filename, t_scene *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		trimmed_line = check_trim(line);
+		if (!parse_line(line, scene))
+			return (free(line), close(fd), false);
 		free(line);
-		if (trimmed_line)
-		{
-			if (!parse_line(trimmed_line, scene))
-				return (free(trimmed_line), close(fd), false);
-			free(trimmed_line);
-		}
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (!scene->camera)
+		return (put_error("Scene must have a camera defined\n"), false);
 	return (true);
 }
