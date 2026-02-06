@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder_utils2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nsahakya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/06 18:20:07 by nsahakya          #+#    #+#             */
+/*   Updated: 2026/02/06 18:20:08 by nsahakya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../inc/miniRT.h"
 
 bool	cylinder_body_hit(t_ray ray, t_cylinder *cylinder, double *t_hit)
@@ -22,59 +34,65 @@ bool	cylinder_body_hit(t_ray ray, t_cylinder *cylinder, double *t_hit)
 	return (false);
 }
 
-bool	cylinder_disk_hit(t_ray ray, t_cylinder *cylinder, double *t_hit)
+static void	intersect_check(bool *hit, double t_disk, double *closest_t)
 {
-	t_vec3	disk_center;
+	if (!*hit || t_disk < *closest_t)
+		*closest_t = t_disk;
+	*hit = true;
+}
+
+bool	cylinder_disk_hit(t_ray ray, t_cylinder *cy, double *t_hit)
+{
+	t_disk	disk;
 	double	closest_t;
-	double	t_disk;
+	double	t_disk_t;
 	bool	hit;
 
 	if (!t_hit)
 		return (false);
 	hit = false;
-	disk_center = vec3_add(cylinder->center, vec3_scale(cylinder->axis,
-				cylinder->half_height));
-	if (intersect_disk(ray, disk_center, cylinder->axis, cylinder->radius,
-			&t_disk))
+	disk.center = vec3_add(cy->center, vec3_scale(cy->axis, cy->half_height));
+	disk.normal = cy->axis;
+	disk.radius = cy->radius;
+	if (intersect_disk(ray, disk, &t_disk_t))
 	{
-		closest_t = t_disk;
+		closest_t = t_disk_t;
 		hit = true;
 	}
-	disk_center = vec3_subtract(cylinder->center, vec3_scale(cylinder->axis,
-				cylinder->half_height));
-	if (intersect_disk(ray, disk_center, vec3_scale(cylinder->axis, -1.0),
-			cylinder->radius, &t_disk))
-	{
-		if (!hit || t_disk < closest_t)
-			closest_t = t_disk;
-		hit = true;
-	}
+	disk.center = vec3_subtract(cy->center, vec3_scale(cy->axis,
+				cy->half_height));
+	disk.normal = vec3_scale(cy->axis, -1.0);
+	if (intersect_disk(ray, disk, &t_disk_t))
+		intersect_check(&hit, t_disk_t, &closest_t);
 	if (!hit)
 		return (false);
 	*t_hit = closest_t;
 	return (true);
 }
 
-bool	intersect_disk(t_ray ray, t_vec3 disk_center, t_vec3 disk_normal,
-		double radius, double *t_hit)
+// ...existing code...
+
+bool	intersect_disk(t_ray ray, t_disk disk, double *t_hit)
 {
 	t_disk_intersect	d;
 
 	if (!t_hit)
 		return (false);
-	d.denom = vec3_dot(ray.direction, disk_normal);
+	d.denom = vec3_dot(ray.direction, disk.normal);
 	if (fabs(d.denom) < EPSILON)
 		return (false);
-	d.t = vec3_dot(vec3_subtract(disk_center, ray.origin), disk_normal)
+	d.t = vec3_dot(vec3_subtract(disk.center, ray.origin), disk.normal)
 		/ d.denom;
 	if (d.t <= EPSILON)
 		return (false);
 	d.p = ray_point_at(ray, d.t);
-	d.v = vec3_subtract(d.p, disk_center);
-	d.in_plane = vec3_subtract(d.v, project_on_axis(d.v, disk_normal));
+	d.v = vec3_subtract(d.p, disk.center);
+	d.in_plane = vec3_subtract(d.v, project_on_axis(d.v, disk.normal));
 	d.dist_square = vec3_length_squared(d.in_plane);
-	if (d.dist_square > radius * radius)
+	if (d.dist_square > disk.radius * disk.radius)
 		return (false);
 	*t_hit = d.t;
 	return (true);
 }
+
+// ...existing code...

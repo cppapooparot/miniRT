@@ -47,6 +47,13 @@ typedef struct s_disk_intersect
 	double		dist_square;
 }				t_disk_intersect;
 
+typedef struct s_disk
+{
+	t_vec3		center;
+	t_vec3		normal;
+	double		radius;
+}				t_disk;
+
 typedef struct s_cy_body
 {
 	t_vec3		oc;
@@ -82,8 +89,7 @@ bool			cylinder_body_hit(t_ray ray, t_cylinder *cylinder,
 					double *t_hit);
 bool			cylinder_disk_hit(t_ray ray, t_cylinder *cylinder,
 					double *t_hit);
-bool			intersect_disk(t_ray ray, t_vec3 disk_center,
-					t_vec3 disk_normal, double radius, double *t_hit);
+bool			intersect_disk(t_ray ray, t_disk disk, double *t_hit);
 
 /* normals */
 t_vec3			get_plane_normal(t_plane *plane, t_vec3 point, t_vec3 ray_dir);
