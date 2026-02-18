@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   closest_intersection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsahakya <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:19:48 by nsahakya          #+#    #+#             */
-/*   Updated: 2026/02/06 18:19:50 by nsahakya         ###   ########.fr       */
+/*   Updated: 2026/02/18 22:27:21 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ static void	check_sphere_intersections(t_ray ray, t_list *spheres,
 			rec->point = vec3_add(ray.origin, vec3_scale(ray.direction, t));
 			rec->normal = get_sphere_normal(sp, rec->point, ray.direction);
 			rec->color = sp->color;
-			rec->sphere = sp;
-			rec->cylinder = NULL;
-			rec->plane = NULL;
-			rec->type = HIT_SPHERE;
 		}
 		node = node->next;
 	}
@@ -59,10 +55,6 @@ static void	check_plane_intersections(t_ray ray, t_list *planes, double *best_t,
 			rec->point = vec3_add(ray.origin, vec3_scale(ray.direction, t));
 			rec->normal = get_plane_normal(pl, rec->point, ray.direction);
 			rec->color = pl->color;
-			rec->plane = pl;
-			rec->cylinder = NULL;
-			rec->sphere = NULL;
-			rec->type = HIT_PLANE;
 		}
 		node = node->next;
 	}
@@ -87,10 +79,6 @@ static void	check_cylinder_intersections(t_ray ray, t_list *cylinders,
 			rec->point = vec3_add(ray.origin, vec3_scale(ray.direction, t));
 			rec->normal = get_cylinder_normal(cy, rec->point, ray.direction);
 			rec->color = cy->color;
-			rec->cylinder = cy;
-			rec->sphere = NULL;
-			rec->plane = NULL;
-			rec->type = HIT_CYLINDER;
 		}
 		node = node->next;
 	}

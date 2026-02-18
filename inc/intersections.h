@@ -4,98 +4,82 @@
 # include "scene.h"
 # include <stdbool.h>
 
-typedef enum e_hit_type
-{
-	HIT_NONE = 0,
-	HIT_SPHERE,
-	HIT_PLANE,
-	HIT_CYLINDER
-}				t_hit_type;
-
 typedef struct s_hit_record
 {
-	bool		hit;
-	double		t;
-	t_vec3		point;
-	t_vec3		normal;
-	t_rgb		color;
-	t_hit_type	type;
-	t_cylinder	*cylinder;
-	t_sphere	*sphere;
-	t_plane		*plane;
-}				t_hit_record;
+	bool	hit;
+	double	t;
+	t_vec3	point;
+	t_vec3	normal;
+	t_rgb	color;
+}			t_hit_record;
 
 typedef struct s_sphere_intersect
 {
-	t_vec3		oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-	double		sqrt_d;
-	double		t0;
-	double		t1;
-}				t_sphere_intersect;
+	t_vec3	oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	sqrt_d;
+	double	t0;
+	double	t1;
+}			t_sphere_intersect;
 
 typedef struct s_disk_intersect
 {
-	double		denom;
-	double		t;
-	t_vec3		p;
-	t_vec3		v;
-	t_vec3		in_plane;
-	double		dist_square;
-}				t_disk_intersect;
+	double	denom;
+	double	t;
+	t_vec3	p;
+	t_vec3	v;
+	t_vec3	in_plane;
+	double	dist_square;
+}			t_disk_intersect;
 
 typedef struct s_disk
 {
-	t_vec3		center;
-	t_vec3		normal;
-	double		radius;
-}				t_disk;
+	t_vec3	center;
+	t_vec3	normal;
+	double	radius;
+}			t_disk;
 
 typedef struct s_cy_body
 {
-	t_vec3		oc;
-	double		d_dot_a;
-	double		oc_dot_a;
-	t_vec3		d_perp;
-	t_vec3		oc_perp;
-	double		a;
-	double		b;
-	double		c;
-	double		disc;
-	double		sqrt_disc;
-	double		t0;
-	double		t1;
-}				t_cy_body;
+	t_vec3	oc;
+	double	d_dot_a;
+	double	oc_dot_a;
+	t_vec3	d_perp;
+	t_vec3	oc_perp;
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+	double	sqrt_disc;
+	double	t0;
+	double	t1;
+}			t_cy_body;
 
-bool			intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
-bool			intersect_plane(t_ray ray, t_plane *plane, double *t);
-bool			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
+bool		intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
+bool		intersect_plane(t_ray ray, t_plane *plane, double *t);
+bool		intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
 
-bool			find_closest_intersection(t_ray ray, t_scene *scene,
-					t_hit_record *rec);
+bool		find_closest_intersection(t_ray ray, t_scene *scene,
+				t_hit_record *rec);
 
 /*utils*/
 
 /*cylinder*/
-t_vec3			ray_point_at(t_ray ray, double t);
-t_vec3			project_on_axis(t_vec3 v, t_vec3 axis);
-void			cylinder_body_init(t_cy_body *b, t_ray ray,
-					t_cylinder *cylinder);
-bool			cylinder_body_solve(t_cy_body *b);
-bool			cylinder_body_hit(t_ray ray, t_cylinder *cylinder,
-					double *t_hit);
-bool			cylinder_disk_hit(t_ray ray, t_cylinder *cylinder,
-					double *t_hit);
-bool			intersect_disk(t_ray ray, t_disk disk, double *t_hit);
+t_vec3		ray_point_at(t_ray ray, double t);
+t_vec3		project_on_axis(t_vec3 v, t_vec3 axis);
+void		cylinder_body_init(t_cy_body *b, t_ray ray, t_cylinder *cylinder);
+bool		cylinder_body_solve(t_cy_body *b);
+bool		cylinder_body_hit(t_ray ray, t_cylinder *cylinder, double *t_hit);
+bool		cylinder_disk_hit(t_ray ray, t_cylinder *cylinder, double *t_hit);
+bool		intersect_disk(t_ray ray, t_disk disk, double *t_hit);
 
 /* normals */
-t_vec3			get_plane_normal(t_plane *plane, t_vec3 point, t_vec3 ray_dir);
-t_vec3			get_sphere_normal(t_sphere *sphere, t_vec3 point,
-					t_vec3 ray_dir);
-t_vec3			get_cylinder_normal(t_cylinder *cylinder, t_vec3 point,
-					t_vec3 ray_dir);
+t_vec3		get_plane_normal(t_plane *plane, t_vec3 point, t_vec3 ray_dir);
+t_vec3		get_sphere_normal(t_sphere *sphere, t_vec3 point, t_vec3 ray_dir);
+t_vec3		get_cylinder_normal(t_cylinder *cylinder, t_vec3 point,
+				t_vec3 ray_dir);
 
 #endif
