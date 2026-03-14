@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 14:07:51 by maghumya          #+#    #+#             */
-/*   Updated: 2026/02/03 02:26:21 by maghumya         ###   ########.fr       */
+/*   Updated: 2026/03/14 13:28:28 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_viewport	setup_viewport(t_camera *camera, int image_width, int image_height)
 	viewport.height = 2.0 * tan((camera->fov * 0.5) * (M_PI / 180.0));
 	viewport.width = aspect_ratio * viewport.height;
 	camera_basis.w = vec3_normalize(vec3_negate(camera->direction));
-	camera_basis.u = vec3_normalize(vec3_cross(up, camera_basis.w));
-	camera_basis.v = vec3_cross(camera_basis.w, camera_basis.u);
+	camera_basis.u = vec3_normalize(vec3_cross(camera_basis.w, up));
+	camera_basis.v = vec3_cross(camera_basis.u, camera_basis.w);
 	viewport.horizontal = vec3_scale(camera_basis.u, viewport.width);
 	viewport.vertical = vec3_scale(camera_basis.v, -viewport.height);
 	viewport.center = vec3_add(camera->position, vec3_scale(camera->direction,
